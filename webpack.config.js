@@ -1,16 +1,28 @@
 const path = require('path');
 const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const PugPlugin = require('pug-plugin');
 
 
 module.exports = {
+  // optimization: {
+  //   splitChunks: {
+  //     cacheGroups: {
+  //       scripts: {
+  //         test: /\\.(js|ts)$/,
+  //         chunks: 'all',
+  //       },
+  //     },
+  //   },
+  // },
   entry: {
-    index: path.resolve(__dirname, './src/index.js')
+    index: './src/pug/pages/index/index.pug',
+    about: './src/pug/pages/about/about.pug'
   },
   output: {
-    path: path.resolve(__dirname, './dist'),
-    filename: '[name].bundle.js',
+    filename: 'assets/js/[name].[contenthash:8].js',
+    path: path.join(__dirname, './dist'),
+    publicPath: '/'
   },
   mode: 'development',
   stats: {
@@ -18,39 +30,36 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: true,
-    static: {
-      directory: path.join(__dirname, '.src/pages'),
-    },
+    // static: {
+    //   directory: path.join(__dirname, '.src/pug/pages/index'),
+    // },
     open: true,
     compress: true,
     hot: true,
-    port: 8080,
-    watchFiles: ['src/**/*.pug']
+    port: 3000,
+    // watchFiles: ['src/pug/pages/**/*.*']
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      template: './src/pages/index.pug',
-      filename: 'index.html',
-      // inject: false
-    }),
-    new HtmlWebpackPlugin({
-      template: './src/pages/about.pug',
-      filename: 'about.html',
-      // inject: false,
-      files: {
-        js: './src/about.js'
-      }
+    new PugPlugin({
+      pretty: true,
+      modules: [
+        PugPlugin.extractCss({
+          filename: 'assets/css/[name].[contenthash:8].css'
+        })
+      ]
     }),
     new CleanWebpackPlugin(),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    
   ],
   module: {
     rules: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: ['babel-loader'],
-      },
+      // {
+      //   test: /\.js$/,
+      //   exclude: /node_modules/,
+      //   use: ['babel-loader'],
+      //   exclude: '/node_modules/'
+      // },
       {
         test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
         type: 'asset/resource',
@@ -65,7 +74,11 @@ module.exports = {
       },
       {
         test: /\.pug$/,
-        use: ['pug-loader'],
+        loader: PugPlugin.loader,
+        options: {
+          method: 'render',
+        }
+        
       },
     ],
   }
