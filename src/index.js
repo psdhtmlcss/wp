@@ -1,1 +1,3 @@
-console.log('test321321231');
+import './blocks/h1/h1.scss';
+
+console.log('test');

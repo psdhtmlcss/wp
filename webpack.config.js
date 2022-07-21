@@ -2,12 +2,11 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const NunjucksWebpackPlugin = require('nunjucks-webpack-plugin');
 
 
 module.exports = {
   entry: {
-    index_bundle: path.resolve(__dirname, './src/index.js'),
+    index: path.resolve(__dirname, './src/index.js')
   },
   output: {
     path: path.resolve(__dirname, './dist'),
@@ -26,29 +25,22 @@ module.exports = {
     compress: true,
     hot: true,
     port: 8080,
-    watchFiles: ['src/**/*.html']
+    watchFiles: ['src/**/*.pug']
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/pages/index.html',
-      filename: 'index.html'
+      template: './src/pages/index.pug',
+      filename: 'index.html',
+      // inject: false
     }),
     new HtmlWebpackPlugin({
-      template: './src/pages/about.html',
-      filename: 'about.html'
+      template: './src/pages/about.pug',
+      filename: 'about.html',
+      // inject: false,
+      files: {
+        js: './src/about.js'
+      }
     }),
-    // new NunjucksWebpackPlugin({
-    //   templates: [
-    //     {
-    //       from: './src/pages/index.njk',
-    //       to: 'index.html',
-    //     },
-    //     {
-    //       from: './src/pages/about.njk',
-    //       to: 'about.html',
-    //     }
-    //   ]
-    // }),
     new CleanWebpackPlugin(),
     new webpack.HotModuleReplacementPlugin()
   ],
@@ -71,10 +63,10 @@ module.exports = {
         test: /\.(scss|css)$/,
         use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
       },
-      // {
-      //   test: /\.njk|nunjucks$/,
-      //   use: ['nunjucks-loader'],
-      // },
+      {
+        test: /\.pug$/,
+        use: ['pug-loader'],
+      },
     ],
   }
 }
