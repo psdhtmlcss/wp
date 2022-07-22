@@ -30,14 +30,14 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: true,
-    // static: {
-    //   directory: path.join(__dirname, '.src/pug/pages/index'),
-    // },
+    static: {
+      directory: path.join(__dirname, './dist'),
+    },
     open: true,
     compress: true,
     hot: true,
     port: 3000,
-    // watchFiles: ['src/pug/pages/**/*.*']
+    watchFiles: ['src/pug/pages/**/*.*']
   },
   plugins: [
     new PugPlugin({
@@ -54,12 +54,12 @@ module.exports = {
   ],
   module: {
     rules: [
-      // {
-      //   test: /\.js$/,
-      //   exclude: /node_modules/,
-      //   use: ['babel-loader'],
-      //   exclude: '/node_modules/'
-      // },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: ['babel-loader'],
+        exclude: '/node_modules/'
+      },
       {
         test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
         type: 'asset/resource',
