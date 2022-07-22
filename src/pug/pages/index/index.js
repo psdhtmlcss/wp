@@ -1,1 +1,1 @@
-console.log('index');
+import 'Blocks/button/button.js';

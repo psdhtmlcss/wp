@@ -1,3 +1,4 @@
+/* eslint-disable */
 const path = require('path');
 const webpack = require('webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -15,6 +16,16 @@ module.exports = {
   },
   stats: {
     children: true,
+  },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        scripts: {
+          test: /\.(js|scss)$/,
+          chunks: 'all',
+        },
+      },
+    },
   },
   devServer: {
     historyApiFallback: true,
@@ -57,7 +68,15 @@ module.exports = {
         exclude: '/node_modules/'
       },
       {
-        test: /\.(png|jpg|jpeg|ico)/,
+        test: /\.pug$/,
+        loader: PugPlugin.loader,
+        options: {
+          method: 'render',
+        }
+
+      },
+      {
+        test: /\.(png|jpg|jpeg|svg|ico)/,
         type: 'asset/resource',
         generator: {
           filename: 'assets/img/[name].[hash:8][ext]',
@@ -73,15 +92,7 @@ module.exports = {
       {
         test: /\.(scss|css)$/,
         use: ['css-loader', 'sass-loader'],
-      },
-      {
-        test: /\.pug$/,
-        loader: PugPlugin.loader,
-        options: {
-          method: 'render',
-        }
-        
-      },
+      }
     ],
   }
 }
