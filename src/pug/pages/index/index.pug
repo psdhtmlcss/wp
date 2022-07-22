@@ -1,10 +1,24 @@
-doctype html
-html(lang="en")
-  include ../../includes/head
-  body 
+extends ../../includes/layout.pug
+block variables
+  var title = 'Index page'
+  block styles
+    link(href=require('./index.scss') rel='stylesheet')
 
-    h1 Pug asdf
+//- extends ../../includes/layout.pug
+//- block variables 
+//-   var title = 'Index page'
 
-    script(src=require('./index.js') defer)
+//- block styles 
+//-   link(href=require('./index.scss') rel='stylesheet')
+
+//- block content 
+//-   h1 = title
+//-   p Lorem ipsum, dolor sit amet consectetur adipisicing elit. Est repellat, numquam recusandae necessitatibus minima itaque nulla quas cumque a sint, voluptates ad magnam consectetur. Dolorem ad ex error impedit sit.
+
+//- block footer
+//-   p footer 
+  
+//- block scripts
+//-   script(src=require('./index.js') defer)
 
   
