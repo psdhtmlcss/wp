@@ -1,0 +1,12 @@
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Inter"),
+       url("~Fonts/Inter-Regular.woff2") format("woff2"),
+       url("~Fonts/Inter-Regular.woff") format("woff");
+}
+
+body {
+  font: 400 16px/1.5 'Inter', sans-serif;
+}

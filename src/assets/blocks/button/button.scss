@@ -1,0 +1,12 @@
+$bg-color: blue;
+$font-color: white;
+$border-radius: 5px;
+
+.btn {
+  border: 0;
+  background-color: $bg-color;
+  color: $font-color;
+  border-radius: $border-radius;
+  padding: 15px 30px;
+  cursor: pointer;
+}

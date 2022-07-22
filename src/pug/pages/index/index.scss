@@ -1,1 +1,8 @@
-@use '../../../assets/components/about/about';
+@import '~Blocks/button/button';
+
+.bg-img {
+  width: 500px;
+  height: 400px;
+  background: url('~Img/bg.jpg') center no-repeat;
+  background-size: cover;
+}

@@ -3,16 +3,10 @@ block variables
 doctype html
 html(lang="ru")
   head
+    link(rel="icon" type="image/png" href=require('~Img/favicon.png'))
     title #{title}
+    link(href=require('~Common/common.scss') rel='stylesheet')
     block styles
   body
-
-//- doctype html
-//- html(lang="ru")
-//- 	head
-//- 		title #{title}
-//- 		block styles
-//-   body
-//- 		block content
-//- 		block footer
-//- 		block scripts
+    block content
+    block scripts

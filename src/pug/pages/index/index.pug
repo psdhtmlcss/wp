@@ -1,24 +1,18 @@
 extends ../../includes/layout.pug
 block variables
-  var title = 'Index page'
-  block styles
-    link(href=require('./index.scss') rel='stylesheet')
-
-//- extends ../../includes/layout.pug
-//- block variables 
-//-   var title = 'Index page'
-
-//- block styles 
-//-   link(href=require('./index.scss') rel='stylesheet')
-
-//- block content 
-//-   h1 = title
-//-   p Lorem ipsum, dolor sit amet consectetur adipisicing elit. Est repellat, numquam recusandae necessitatibus minima itaque nulla quas cumque a sint, voluptates ad magnam consectetur. Dolorem ad ex error impedit sit.
-
-//- block footer
-//-   p footer 
-  
-//- block scripts
-//-   script(src=require('./index.js') defer)
+  - var title = 'Index page'
+block styles
+  link(href=require('./index.scss') rel='stylesheet')
+block content 
+  h1 Index
+  p
+    button(type="button" class="btn") Button
+  div
+    img(src=require('~Img/bg.jpg') alt="Example" width="500")
+  div
+    h2 Background image
+    div.bg-img
+block scripts
+  script(src=require('./index.js') defer)
 
   
